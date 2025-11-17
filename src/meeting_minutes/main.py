@@ -4,24 +4,18 @@ from openai import OpenAI
 from pydub import AudioSegment
 from pydub.utils import make_chunks
 from pathlib import Path
-
 from crews.meeting_minutes_crew.meeting_minutes_crew import MeetingMinutesCrew
 from crews.gmailcrew.gmailcrew import GmailCrew
-
 import os
 from dotenv import load_dotenv
-
 load_dotenv()
 
 client = OpenAI()
-
 class MeetingMinutesState(BaseModel):
     transcript: str = ""
     meeting_minutes: str = ""
 
-
 class MeetingMinutesFlow(Flow[MeetingMinutesState]):
-
     @start()
     def transcribe_meeting(self):
         print("Generating Transcription")
