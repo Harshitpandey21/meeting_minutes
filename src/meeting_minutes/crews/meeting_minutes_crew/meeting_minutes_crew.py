@@ -15,7 +15,7 @@ class MeetingMinutesCrew():
 	def meeting_minutes_summarizer(self) -> Agent:
 		return Agent(
 			config=self.agents_config['meeting_minutes_summarizer'],
-			tools=[file_writer_tool_summary, file_writer_tool_action_items, file_writer_tool_sentiment],
+			tools=[file_writer_tool_summary, file_writer_tool_action_items, file_writer_tool_sentiment]
 		)
 	
 	@agent
@@ -38,7 +38,6 @@ class MeetingMinutesCrew():
 
 	@crew
 	def crew(self) -> Crew:
-		"""Creates the Research Crew"""
 		return Crew(
 			agents=self.agents, 
 			tasks=self.tasks, 
