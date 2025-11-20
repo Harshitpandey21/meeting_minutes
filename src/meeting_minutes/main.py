@@ -44,9 +44,7 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
     @listen(transcribe_meeting)
     def generate_meeting_minutes(self):
         print("Generating Meeting Minutes")
-
         crew = MeetingMinutesCrew()
-
         inputs = {
             "transcript": self.state.transcript
         }
@@ -56,13 +54,10 @@ class MeetingMinutesFlow(Flow[MeetingMinutesState]):
     @listen(generate_meeting_minutes)
     def create_draft_meeting_minutes(self):
         print("Creating Draft Meeting Minutes")
-
         crew = GmailCrew()
-
         inputs = {
             "body": self.state.meeting_minutes
         }
-
         draft_crew = crew.crew().kickoff(inputs)
         print(f"Draft Crew: {draft_crew}")
 
