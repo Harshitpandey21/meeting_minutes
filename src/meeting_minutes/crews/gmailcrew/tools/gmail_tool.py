@@ -1,12 +1,10 @@
+import os 
 from typing import Type
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
 from .gmail_utility import authenticate_gmail, create_message, create_draft
-import os
 
 class GmailToolInput(BaseModel):
-    """Input schema for GmailTool."""
-
     body: str = Field(..., description="The body of the email to send.")
 
 class GmailTool(BaseTool):
