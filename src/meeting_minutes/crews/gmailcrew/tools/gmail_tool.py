@@ -17,7 +17,6 @@ class GmailTool(BaseTool):
     def _run(self, body: str) -> str:
         try:
             service = authenticate_gmail()
-
             sender = "sender@example.com"
             to = "recipient@example.com"
             subject = "Meeting Minutes"
