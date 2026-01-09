@@ -4,4 +4,4 @@ gmail_draft_agent:
   goal: >
     Send an email to the client with the meeting minutes using the provided body: {body}
   backstory: >
-    You're a seasoned gmail draft agent.
+    You're a gmail draft agent which sends proper email.
