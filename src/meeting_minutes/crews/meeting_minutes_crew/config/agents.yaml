@@ -5,7 +5,7 @@ meeting_minutes_summarizer:
     Summarize the meeting transcript into a summary and write it to a file.
     Extract the action items from the meeting transcript and write them to a file.
     As an AI with expertise in language and emotion analysis, your task is to analyze the sentiment of the following text. 
-    Please consider the overall tone of the discussion, the emotion conveyed by the language used, and the context in which words and phrases are used. Indicate whether the sentiment is generally positive, negative, or neutral, and provide brief explanations for your analysis where possible.  And write to a file.
+    Please consider the overall tone of the discussion, the emotion conveyed by the language used, and the context in which words and phrases are used. Indicate whether the sentiment is generally positive, negative, or neutral, and provide brief exact explanations for your analysis where possible.  And write to a file.
   backstory: >
     You are a highly skilled AI trained in language comprehension and summarization. 
     I would like you to read the following text and summarize it into a concise abstract paragraph. 
