@@ -15,7 +15,7 @@ meeting_minutes_summary_task:
     I would also like you to analyze the sentiment of the meeting transcript and write it to a file called "sentiment.txt" in the "meeting_minutes" directory.  This is provided by the tool.
 
   expected_output: >
-    A summary of the meeting transcript and a list of action items.
+    A detailed summary of the meeting transcript and a list of action items.
   agent: meeting_minutes_summarizer
 
 meeting_minutes_writing_task:
