@@ -1,10 +1,6 @@
 # Meeting Minutes Automation 🎙️📝
 
-<<<<<<< HEAD
-Welcome to the Meeting Minute Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
-=======
 An AI-powered multi-agent system built with [crewAI](https://crewai.com) that automatically transcribes meeting audio, generates structured meeting minutes, and drafts email summaries — all in a single automated flow.
->>>>>>> 807bc60 (update Readme File)
 
 ---
 
