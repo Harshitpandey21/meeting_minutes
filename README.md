@@ -1,56 +1,157 @@
-# {{crew_name}} Crew
+# Meeting Minutes Automation 🎙️📝
 
+<<<<<<< HEAD
 Welcome to the Meeting Minute Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+=======
+An AI-powered multi-agent system built with [crewAI](https://crewai.com) that automatically transcribes meeting audio, generates structured meeting minutes, and drafts email summaries — all in a single automated flow.
+>>>>>>> 807bc60 (update Readme File)
 
-## Installation
+---
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+## Overview
 
-First, if you haven't already, install uv:
+This project uses a **crewAI Flow** to chain together three automated stages:
 
-```bash
-pip install uv
+1. **Transcription** — Splits a `.wav` audio file into chunks and transcribes each chunk using OpenAI's Whisper model.
+2. **Meeting Minutes Generation** — A crew of two AI agents processes the transcript to produce a summary, extract action items, and analyze sentiment, then compiles everything into a polished Markdown document.
+3. **Gmail Draft** — A dedicated Gmail agent takes the finished meeting minutes and creates a draft email, ready to send to stakeholders.
+
+### Example Output
+
+The system produces three intermediate files in the `meeting_minutes/` directory before assembling the final document:
+
+| File | Description |
+|---|---|
+| `summary.txt` | Concise paragraph summarizing the meeting |
+| `action_items.txt` | Bullet-point list of follow-up tasks |
+| `sentiment.txt` | Tone/sentiment analysis of the discussion |
+
+---
+
+## Project Structure
+
+```
+meeting_minutes/
+├── src/
+│   └── meeting_minutes/
+│       ├── main.py                          # Entry point — defines the crewAI Flow
+│       ├── EarningsCall.wav                 # Sample audio file for testing
+│       ├── crews/
+│       │   ├── meeting_minutes_crew/        # Summarizer + Writer agents
+│       │   │   ├── meeting_minutes_crew.py
+│       │   │   └── config/
+│       │   │       ├── agents.yaml
+│       │   │       └── tasks.yaml
+│       │   └── gmailcrew/                   # Gmail draft agent
+│       │       ├── gmailcrew.py
+│       │       ├── tools/
+│       │       │   ├── gmail_tool.py
+│       │       │   └── gmail_utility.py
+│       │       └── config/
+│       │           ├── agents.yaml
+│       │           └── tasks.yaml
+│       └── tools/
+│           └── custom_tool.py
+├── meeting_minutes/                         # Generated output files
+│   ├── summary.txt
+│   ├── action_items.txt
+│   └── sentiment.txt
+├── pyproject.toml
+├── .env
+└── README.md
 ```
 
-Next, navigate to your project directory and install the dependencies:
+---
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
+## Prerequisites
+
+- Python `>=3.10` and `<3.14`
+- [uv](https://docs.astral.sh/uv/) — fast Python package manager
+- An **OpenAI API key** (used for Whisper transcription and LLM agents)
+- A **Gmail account** with API access configured (for the Gmail draft crew)
+
+---
+
+## Usage
+
+Place your meeting audio file (`.wav` format) at:
+
+```
+src/meeting_minutes/EarningsCall.wav
 ```
 
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/meeting_minutes/config/agents.yaml` to define your agents
-- Modify `src/meeting_minutes/config/tasks.yaml` to define your tasks
-- Modify `src/meeting_minutes/crew.py` to add your own logic, tools and specific args
-- Modify `src/meeting_minutes/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your flow and begin execution, run this from the root folder of your project:
+Then run the full flow from the project root:
 
 ```bash
 crewai run
 ```
 
-This command initializes the meeting_minutes Flow as defined in your configuration.
+This will:
+1. Transcribe the audio file in 60-second chunks using Whisper.
+2. Run the `MeetingMinutesCrew` to generate `summary.txt`, `action_items.txt`, and `sentiment.txt`.
+3. Assemble a final Markdown meeting minutes document.
+4. Trigger the `GmailCrew` to create a Gmail draft with the meeting minutes as the body.
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+You can also visualize the flow graph before running:
 
-## Understanding Your Crew
+```bash
+python -m meeting_minutes.main
+```
 
-The meeting_minutes Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+---
 
-## Support
+## Agents
 
-For support, questions, or feedback regarding the {{crew_name}} Crew or crewAI.
+### MeetingMinutesCrew
 
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+| Agent | Role | Responsibility |
+|---|---|---|
+| `meeting_minutes_summarizer` | Summarizer | Reads the transcript, produces a summary, extracts action items, and analyzes sentiment — writing each to a separate file. |
+| `meeting_minutes_writer` | Writer | Reads the three output files and compiles them into a well-formatted Markdown meeting minutes document. |
 
-Let's create wonders together with the power and simplicity of crewAI.
+### GmailCrew
+
+| Agent | Role | Responsibility |
+|---|---|---|
+| `gmail_draft_agent` | Gmail Draft Agent | Takes the meeting minutes body and creates a Gmail draft using the Gmail API tool. |
+
+---
+
+## Configuration
+
+Agent goals and task descriptions are fully configurable via YAML files — no code changes needed for most customizations:
+
+- `src/meeting_minutes/crews/meeting_minutes_crew/config/agents.yaml` — Define agent roles, goals, and backstories
+- `src/meeting_minutes/crews/meeting_minutes_crew/config/tasks.yaml` — Define task descriptions and expected outputs
+- `src/meeting_minutes/crews/gmailcrew/config/agents.yaml` — Configure the Gmail agent
+- `src/meeting_minutes/crews/gmailcrew/config/tasks.yaml` — Configure the Gmail drafting task
+
+The meeting minutes document is currently configured to use:
+- **Company:** NewAI
+- **Organizer:** Harshit
+- **Location:** Zoom
+
+To change these defaults, edit the `meeting_minutes_writing_task` description in `tasks.yaml`.
+
+---
+
+## Dependencies
+
+| Package | Purpose |
+|---|---|
+| `crewai[tools]==1.3.0` | Multi-agent orchestration framework |
+| `openai` | Whisper transcription + LLM backbone |
+| `pydub` | Audio file chunking |
+| `python-dotenv` | Environment variable management |
+
+---
+
+## Support & Resources
+
+- [crewAI Documentation](https://docs.crewai.com)
+- [crewAI GitHub Repository](https://github.com/joaomdmoura/crewai)
+- [Join the crewAI Discord](https://discord.com/invite/X4JWnZnxPb)
+- [OpenAI Whisper Docs](https://platform.openai.com/docs/guides/speech-to-text)
+
+---
+
