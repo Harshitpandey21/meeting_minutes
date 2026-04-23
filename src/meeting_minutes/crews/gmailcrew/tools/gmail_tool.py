@@ -10,7 +10,7 @@ class GmailToolInput(BaseModel):
 class GmailTool(BaseTool):
     name: str = "GmailTool"
     description: str = (
-        "Clear description for what this tool is useful for, you agent will need this information to use it."
+        "A tool to send emails using Gmail. It takes the body of the email as input and sends it to a predefined recipient."
     )
     args_schema: Type[BaseModel] = GmailToolInput
 
