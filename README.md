@@ -62,7 +62,7 @@ meeting_minutes/
 ## Prerequisites
 
 - Python `>=3.10` and `<3.14`
-- [uv](https://docs.astral.sh/uv/) — fast Python package manager
+- [uv]— fast Python package manager
 - An **OpenAI API key** (used for Whisper transcription and LLM agents)
 - A **Gmail account** with API access configured (for the Gmail draft crew)
 
@@ -142,12 +142,4 @@ To change these defaults, edit the `meeting_minutes_writing_task` description in
 
 ---
 
-## Support & Resources
-
-- [crewAI Documentation](https://docs.crewai.com)
-- [crewAI GitHub Repository](https://github.com/joaomdmoura/crewai)
-- [Join the crewAI Discord](https://discord.com/invite/X4JWnZnxPb)
-- [OpenAI Whisper Docs](https://platform.openai.com/docs/guides/speech-to-text)
-
----
 
