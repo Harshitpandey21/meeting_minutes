@@ -74,6 +74,6 @@ def create_draft(service, user_id, message_body):
         draft = service.users().drafts().create(userId=user_id, body={'message': message_body}).execute()
         print(f'Draft id: {draft["id"]}\nDraft message: {draft["message"]}')
         return draft
-    except Exception as error:
-        print(f'An error occurred: {error}')
+    except Exception as e:
+        print(f'An error occurred: {str(e)})')
         return None
