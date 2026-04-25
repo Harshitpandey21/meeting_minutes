@@ -136,7 +136,7 @@ To change these defaults, edit the `meeting_minutes_writing_task` description in
 | Package | Purpose |
 |---|---|
 | `crewai[tools]==1.3.0` | Multi-agent orchestration framework |
-| `openai` | Whisper transcription + LLM backbone |
+| `openai` | Whisper transcription + LLM |
 | `pydub` | Audio file chunking |
 | `python-dotenv` | Environment variable management |
 
