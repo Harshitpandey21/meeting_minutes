@@ -51,23 +51,19 @@ def authenticate_gmail():
     service = build('gmail', 'v1', credentials=creds)
     return service
 
-def create_message(sender, to, subject, message_text):
-    md = markdown.Markdown(extensions=['tables', 'fenced_code', 'nl2br'])
-    formatted_html = HTML_TEMPLATE.format(
-        final_email_body=md.convert(message_text)
-    )
+def create_message(sender, to, subject, body_markdown):
+    md = markdown.Markdown(extensions=["tables", "fenced_code", "nl2br"])
+    html_body = HTML_TEMPLATE.format(body=md.convert(body_markdown))
 
     msg = EmailMessage()
-    content=formatted_html
+    msg["To"] = to
+    msg["From"] = sender
+    msg["Subject"] = subject
+    msg.add_header("Content-Type", "text/html")
+    msg.set_payload(html_body)
 
-    msg['To'] = to
-    msg['From'] = sender
-    msg['Subject'] = subject
-    msg.add_header('Content-Type','text/html')
-    msg.set_payload(content)
+    return {"raw": base64.urlsafe_b64encode(msg.as_bytes()).decode()}
 
-    encodedMsg = base64.urlsafe_b64encode(msg.as_bytes()).decode()
-    return {'raw': encodedMsg}
 
 def create_draft(service, user_id, message_body):
     try:
