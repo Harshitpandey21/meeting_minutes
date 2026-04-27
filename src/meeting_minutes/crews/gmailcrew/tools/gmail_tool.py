@@ -1,7 +1,7 @@
-import os 
+import os
 from typing import Type
-from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
+from crewai.tools import BaseTool
 from .gmail_utility import authenticate_gmail, create_message, create_draft
 
 class GmailToolInput(BaseModel):
@@ -10,7 +10,8 @@ class GmailToolInput(BaseModel):
 class GmailTool(BaseTool):
     name: str = "GmailTool"
     description: str = (
-        "A tool to send emails using Gmail. It takes the body of the email as input and sends it to a predefined recipient."
+        "A tool to send emails using Gmail. "
+        "It takes the body of the email as input and sends it to a predefined recipient."
     )
     args_schema: Type[BaseModel] = GmailToolInput
 
