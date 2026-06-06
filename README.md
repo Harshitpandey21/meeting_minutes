@@ -10,7 +10,7 @@ This project uses a **crewAI Flow** to chain together three automated stages:
 
 1. **Transcription** — Splits a `.wav` audio file into chunks and transcribes each chunk using OpenAI's Whisper model.
 2. **Meeting Minutes Generation** — A crew of two AI agents processes the transcript to produce a summary, extract action items, and analyze sentiment, then compiles everything into a polished Markdown document.
-3. **Gmail Draft** — A dedicated Gmail agent takes the finished meeting minutes and creates a draft email, ready to send to stakeholders.
+3. **Gmail Draft** — A dedicated Gmail agent takes the finished meeting minutes and creates a draft email using Gmail API key, ready to send to anyone.
 
 ### Example Output
 
